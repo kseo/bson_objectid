@@ -1,5 +1,7 @@
 # bson_objectid
 
+[![Build Status](https://travis-ci.org/kseo/bson_objectid.svg?branch=master)](https://travis-ci.org/kseo/bson_objectid)
+
 BSON [ObjectId][objectid] implementation in Dart.
 
 This package allows you to create and parse ObjectIds without
