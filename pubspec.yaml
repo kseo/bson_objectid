@@ -1,14 +1,16 @@
 name: bson_objectid
 description: BSON ObjectId implementation in Dart
-version: 0.1.0
-author: Kwang Yul Seo <kwangyul.seo@gmail.com>
+version: 2.1.0
+authors:
+  - Kwang Yul Seo <kwangyul.seo@gmail.com>
+  - Ravi Teja Gudapati <tejainece@gmail.com>
 homepage: https://github.com/kseo/bson_objectid
 
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 
 #dependencies:
 #  lib_name: any
 
 dev_dependencies:
-  test: '>=0.12.0 <0.13.0'
+  test:
