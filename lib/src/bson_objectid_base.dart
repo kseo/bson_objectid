@@ -21,8 +21,7 @@ class ObjectId implements Comparable<ObjectId> {
   final int _counter;
 
   /// The timestamp as a [DateTime] instance.
-  DateTime get date =>
-      DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000);
+  DateTime get date => DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000);
 
   /// The timestamp. (number of seconds since the Unix epoch).
   int get timestamp => _timestamp;
