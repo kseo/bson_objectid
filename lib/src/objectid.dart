@@ -213,8 +213,8 @@ List<int> _parseHexString(String s) {
         s, 'invalid hexadecimal representation of an ObjectId: [$s]');
   }
 
-  List<int> b = List<int>(12);
-  for (var i = 0; i < b.length; i++) {
+  final b = List<int>(12);
+  for (int i = 0; i < b.length; i++) {
     b[i] = int.parse(s.substring(i * 2, i * 2 + 2), radix: 16);
   }
   return b;
