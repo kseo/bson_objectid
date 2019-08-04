@@ -4,4 +4,4 @@
 /// BSON ObjectId
 library bson_objectid;
 
-export 'src/bson_objectid_base.dart';
+export 'src/objectid.dart';
