@@ -82,7 +82,7 @@ class ObjectId implements Comparable<ObjectId> {
 
   /// Converts this instance into 24-byte hexadecimal string representation.
   String toHexString() {
-    List<String?> charCodes = List<String?>(24);
+    List<String?> charCodes = List<String?>.filled(24, null);
     int i = 0;
     for (final b in toBytes()) {
       charCodes[i++] = _hexChars[b! >> 4 & 0xF];
@@ -94,7 +94,7 @@ class ObjectId implements Comparable<ObjectId> {
   /// Converts to a byte list. Note that the numbers are stored in big-endian
   /// order.
   List<int?> toBytes() {
-    List<int?> bytes = List<int?>(12);
+    List<int?> bytes = List<int?>.filled(12, null);
     bytes[0] = _int3(_timestamp);
     bytes[1] = _int2(_timestamp);
     bytes[2] = _int1(_timestamp);
@@ -213,7 +213,7 @@ List<int?> _parseHexString(String? s) {
         s, 'invalid hexadecimal representation of an ObjectId: [$s]');
   }
 
-  final b = List<int?>(12);
+  final b = List<int?>.filled(12, null);
   for (int i = 0; i < b.length; i++) {
     b[i] = int.parse(s!.substring(i * 2, i * 2 + 2), radix: 16);
   }
