@@ -1,13 +1,13 @@
 name: crossplat_objectid
 description: Cross-platform BSON ObjectId implementation in Dart
-version: 2.1.2
+version: 3.0.0
 authors:
   - Kwang Yul Seo <kwangyul.seo@gmail.com>
   - Ravi Teja Gudapati <tejainece@gmail.com>
 homepage: https://github.com/tejainece/bson_objectid
 
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dev_dependencies:
-  test:
+  test: ^1.18.2

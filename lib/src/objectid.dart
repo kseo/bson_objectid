@@ -53,15 +53,15 @@ class ObjectId implements Comparable<ObjectId> {
   /// Creates a new instance from a 24-byte hexadecimal string representation.
   ///
   /// Throws an [ArgumentError] if the given hex string is not valid.
-  factory ObjectId.fromHexString(String hexString) {
-    List<int> b = _parseHexString(hexString);
+  factory ObjectId.fromHexString(String? hexString) {
+    List<int?> b = _parseHexString(hexString);
     return ObjectId.fromBytes(b);
   }
 
   /// Creates a new instance from the given byte list.
   ///
   /// Throws an [ArgumentError] if [bytes] is null or its length is not 12.
-  factory ObjectId.fromBytes(List<int> bytes) {
+  factory ObjectId.fromBytes(List<int?>? bytes) {
     if (bytes == null) {
       throw ArgumentError.notNull('bytes');
     }
@@ -69,10 +69,10 @@ class ObjectId implements Comparable<ObjectId> {
       throw ArgumentError.value(bytes, 'need 12 bytes');
     }
 
-    int timestamp = _makeInt(bytes[0], bytes[1], bytes[2], bytes[3]);
-    int machineId = _makeInt(0, bytes[4], bytes[5], bytes[6]);
-    int processId = _makeInt(0, 0, bytes[7], bytes[8]);
-    int counter = _makeInt(0, bytes[9], bytes[10], bytes[11]);
+    int timestamp = _makeInt(bytes[0]!, bytes[1]!, bytes[2]!, bytes[3]!);
+    int machineId = _makeInt(0, bytes[4]!, bytes[5]!, bytes[6]!);
+    int processId = _makeInt(0, 0, bytes[7]!, bytes[8]!);
+    int counter = _makeInt(0, bytes[9]!, bytes[10]!, bytes[11]!);
 
     return ObjectId._internal(timestamp, machineId, processId, counter);
   }
@@ -82,10 +82,10 @@ class ObjectId implements Comparable<ObjectId> {
 
   /// Converts this instance into 24-byte hexadecimal string representation.
   String toHexString() {
-    List<String> charCodes = List<String>(24);
+    List<String?> charCodes = List<String?>(24);
     int i = 0;
     for (final b in toBytes()) {
-      charCodes[i++] = _hexChars[b >> 4 & 0xF];
+      charCodes[i++] = _hexChars[b! >> 4 & 0xF];
       charCodes[i++] = _hexChars[b & 0xF];
     }
     return charCodes.join('');
@@ -93,8 +93,8 @@ class ObjectId implements Comparable<ObjectId> {
 
   /// Converts to a byte list. Note that the numbers are stored in big-endian
   /// order.
-  List<int> toBytes() {
-    List<int> bytes = List<int>(12);
+  List<int?> toBytes() {
+    List<int?> bytes = List<int?>(12);
     bytes[0] = _int3(_timestamp);
     bytes[1] = _int2(_timestamp);
     bytes[2] = _int1(_timestamp);
@@ -129,11 +129,11 @@ class ObjectId implements Comparable<ObjectId> {
 
   @override
   int compareTo(ObjectId other) {
-    List<int> byteList = toBytes();
-    List<int> otherByteList = other.toBytes();
+    List<int?> byteList = toBytes();
+    List<int?> otherByteList = other.toBytes();
     for (var i = 0; i < 12; i++) {
       if (byteList[i] != otherByteList[i]) {
-        return byteList[i] < otherByteList[i] ? -1 : 1;
+        return byteList[i]! < otherByteList[i]! ? -1 : 1;
       }
     }
     return 0;
@@ -144,7 +144,7 @@ class ObjectId implements Comparable<ObjectId> {
 
   /// Checks if a string could be an [ObjectId]. Throws an [ArgumentError] if
   /// [hexString] is null.
-  static bool isValid(String hexString) {
+  static bool isValid(String? hexString) {
     if (hexString == null) {
       throw ArgumentError.notNull('hexString');
     }
@@ -207,15 +207,15 @@ List<String> _hexChars = [
   'f'
 ];
 
-List<int> _parseHexString(String s) {
+List<int?> _parseHexString(String? s) {
   if (!ObjectId.isValid(s)) {
     throw ArgumentError.value(
         s, 'invalid hexadecimal representation of an ObjectId: [$s]');
   }
 
-  final b = List<int>(12);
+  final b = List<int?>(12);
   for (int i = 0; i < b.length; i++) {
-    b[i] = int.parse(s.substring(i * 2, i * 2 + 2), radix: 16);
+    b[i] = int.parse(s!.substring(i * 2, i * 2 + 2), radix: 16);
   }
   return b;
 }
