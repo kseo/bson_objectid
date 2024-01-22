@@ -1,5 +1,9 @@
 # Changelog
 
-## 0.1.0
+## 3.0.0
 
-- Initial version
++ Migrating to null safety
+
+## 2.1.0
+
++ Ported to Dart2

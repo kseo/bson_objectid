@@ -1,17 +1,17 @@
 // Copyright (c) 2016, Kwang Yul Seo. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'package:bson_objectid/bson_objectid.dart';
+import 'package:crossplat_objectid/crossplat_objectid.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('ObjectId', () {
     test('should construct with `fromBytes` constructor', () {
-      final id1 = new ObjectId.fromBytes(
+      final id1 = ObjectId.fromBytes(
           [84, 73, 90, 217, 76, 147, 71, 33, 237, 231, 109, 144]);
       expect(id1.toHexString(), '54495ad94c934721ede76d90');
 
-      final id2 = new ObjectId.fromBytes(
+      final id2 = ObjectId.fromBytes(
           [81, 6, 252, 154, 188, 130, 55, 85, 129, 54, 210, 137]);
       expect(id2.timestamp, 0x5106FC9A);
       expect(id2.machineId, 0x00BC8237);
@@ -20,45 +20,45 @@ void main() {
     });
 
     test('should construct with `date` constructor', () {
-      final d = new DateTime.now();
-      ObjectId id = new ObjectId.fromDate(d);
+      final d = DateTime.now();
+      ObjectId id = ObjectId.fromDate(d);
       expect(d.millisecondsSinceEpoch ~/ 1000,
           id.date.millisecondsSinceEpoch ~/ 1000);
     });
 
     test('should throw an error if constructing with an invalid bytes', () {
-      expect(() => new ObjectId.fromBytes(null), throwsArgumentError);
-      expect(() => new ObjectId.fromBytes([]), throwsArgumentError);
+      expect(() => ObjectId.fromBytes(null), throwsArgumentError);
+      expect(() => ObjectId.fromBytes([]), throwsArgumentError);
     });
 
     test('should construct with `hexString` constructor', () {
-      ObjectId id = new ObjectId();
-      expect(id, new ObjectId.fromHexString(id.toHexString()));
+      ObjectId id = ObjectId();
+      expect(id, ObjectId.fromHexString(id.toHexString()));
     });
 
     test('should throw an error if constructing with an invalid hex string',
         () {
-      expect(() => new ObjectId.fromHexString(null), throwsArgumentError);
-      expect(() => new ObjectId.fromHexString(''), throwsArgumentError);
-      expect(() => new ObjectId.fromHexString('invalid'), throwsArgumentError);
-      expect(() => new ObjectId.fromHexString('zzzzzzzzzzzzzzzzzzzzzzzz'),
+      expect(() => ObjectId.fromHexString(null), throwsArgumentError);
+      expect(() => ObjectId.fromHexString(''), throwsArgumentError);
+      expect(() => ObjectId.fromHexString('invalid'), throwsArgumentError);
+      expect(() => ObjectId.fromHexString('zzzzzzzzzzzzzzzzzzzzzzzz'),
           throwsArgumentError);
-      expect(() => new ObjectId.fromHexString('54495-ad94c934721ede76d9'),
+      expect(() => ObjectId.fromHexString('54495-ad94c934721ede76d9'),
           throwsArgumentError);
     });
 
     test('time', () {
-      final t = new DateTime.now();
-      final id = new ObjectId();
+      final t = DateTime.now();
+      final id = ObjectId();
       expect(id.date.difference(t).inMilliseconds < 3000, isTrue);
     });
 
     test('should increment the counter when a new object is constructed', () {
-      expect(new ObjectId().counter + 1 == new ObjectId().counter, isTrue);
+      expect(ObjectId().counter + 1 == ObjectId().counter, isTrue);
     });
 
     test('should validate legit ObjectId objects', () {
-      final id = new ObjectId();
+      final id = ObjectId();
       expect(ObjectId.isValid(id.toHexString()), isTrue);
     });
 
@@ -78,11 +78,11 @@ void main() {
     });
 
     test('should evaluate equality with ==', () {
-      final id1 = new ObjectId();
-      final id2 = new ObjectId.fromHexString(id1.toHexString());
+      final id1 = ObjectId();
+      final id2 = ObjectId.fromHexString(id1.toHexString());
       expect(id1, id2);
 
-      final id3 = new ObjectId();
+      final id3 = ObjectId();
       expect(id1, isNot(id3));
     });
   });
